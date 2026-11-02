@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .saas-card {
+    @apply bg-white rounded-xl border border-slate-200/90 shadow-card;
+  }
+
+  .saas-input {
+    @apply w-full px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 transition-colors focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/15;
+  }
+
+  .saas-select {
+    @apply w-full px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 transition-colors focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/15;
+  }
+
+  .saas-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[#0B1324] hover:bg-[#16223B] active:bg-[#070C18] disabled:opacity-50 disabled:pointer-events-none text-white text-xs sm:text-sm font-medium transition-colors shadow-sm;
+  }
+
+  .saas-btn-accent {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 disabled:opacity-50 disabled:pointer-events-none text-white text-xs sm:text-sm font-medium transition-colors shadow-sm;
+  }
+
+  .saas-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-white hover:bg-slate-50 active:bg-slate-100 disabled:opacity-50 disabled:pointer-events-none text-slate-700 border border-slate-200/90 text-xs sm:text-sm font-medium transition-colors shadow-sm;
+  }
+
+  .saas-btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 active:bg-rose-700 disabled:opacity-50 disabled:pointer-events-none text-white text-xs sm:text-sm font-medium transition-colors shadow-sm;
+  }
+}
+
+/* Subtle custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

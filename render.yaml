@@ -1,0 +1,97 @@
+services:
+  - type: web
+    name: cold-outreach-api
+    runtime: node
+    plan: starter
+    rootDir: .
+    buildCommand: npm install
+    startCommand: npm --workspace=server run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: cold-outreach-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: UNSUBSCRIBE_SIGNING_SECRET
+        generateValue: true
+      - key: APP_BASE_URL
+        sync: false
+      - key: API_BASE_URL
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: BREVO_SENDER_EMAIL
+        value: info@ramaconsultants.com
+      - key: BREVO_SENDER_NAME
+        value: Rama Consultants
+      - key: BREVO_SENDER_COMPANY
+        value: Rama Consultants
+      - key: BREVO_DAILY_CAP
+        value: "35"
+      - key: BREVO_WEBHOOK_SECRET
+        sync: false
+      - key: VERIFIER_API_KEY
+        sync: false
+      - key: SENDER_POSTAL_ADDRESS
+        value: Nehru Park, SCO 1, S D Market Model Town, Yamuna Nagar, Haryana 135001
+      - key: ALERT_EMAIL
+        value: info@ramaconsultants.com
+
+  - type: worker
+    name: cold-outreach-worker
+    runtime: node
+    plan: starter
+    rootDir: .
+    buildCommand: npm install
+    startCommand: npm --workspace=worker run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: cold-outreach-redis
+          property: connectionString
+      - key: UNSUBSCRIBE_SIGNING_SECRET
+        sync: false
+      - key: APP_BASE_URL
+        sync: false
+      - key: API_BASE_URL
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: BREVO_SENDER_EMAIL
+        value: info@ramaconsultants.com
+      - key: BREVO_SENDER_NAME
+        value: Rama Consultants
+      - key: SENDER_POSTAL_ADDRESS
+        value: Nehru Park, SCO 1, S D Market Model Town, Yamuna Nagar, Haryana 135001
+      - key: ALERT_EMAIL
+        value: info@ramaconsultants.com
+
+  - type: web
+    name: cold-outreach-client
+    runtime: static
+    rootDir: .
+    buildCommand: npm install && npm --workspace=client run build
+    staticPublishPath: client/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_BASE_URL
+        sync: false
+
+  - type: redis
+    name: cold-outreach-redis
+    plan: starter
+    ipAllowList: []

@@ -1,0 +1,24 @@
+{
+  "name": "cold-outreach-email-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Compliant B2B Cold Outreach Email App (MERN + BullMQ + Gmail API)",
+  "workspaces": [
+    "shared",
+    "server",
+    "worker",
+    "client"
+  ],
+  "scripts": {
+    "dev:server": "npm --workspace=server run dev",
+    "dev:worker": "npm --workspace=worker run dev",
+    "dev:client": "npm --workspace=client run dev",
+    "start:server": "npm --workspace=server run start",
+    "start:worker": "npm --workspace=worker run start",
+    "build:client": "npm --workspace=client run build",
+    "test": "node --test shared/test/*.test.js server/test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
